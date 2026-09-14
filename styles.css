@@ -1,12 +1,13 @@
 :root {
-  --bg-primary: #121417;
-  --bg-secondary: #1a1d24;
-  --bg-card: #20242d;
-  --text-main: #f5f5f7;
-  --text-muted: #9ba1ad;
-  --accent-gold: #d4af37;
-  --accent-gold-hover: #c49f2b;
-  --border-subtle: rgba(212, 175, 55, 0.2);
+  /* Softer, warmer luxury palette */
+  --bg-primary: #151413;       /* Deep warm obsidian instead of cold dark gray */
+  --bg-secondary: #1e1c1a;     /* Soft warm charcoal */
+  --bg-card: #252220;          /* Warm taupe-slate card background */
+  --text-main: #f3efe8;        /* Soft ivory cream (much gentler on the eyes than stark white) */
+  --text-muted: #a9a39a;       /* Gentle parchment gray */
+  --accent-gold: #d8b874;      /* Soft satin champagne gold */
+  --accent-gold-hover: #e4c98e;
+  --border-subtle: rgba(216, 184, 116, 0.18);
   --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Montserrat', -apple-system, sans-serif;
   --transition: all 0.3s ease;
@@ -177,7 +178,7 @@ h1, h2, h3, h4 {
   color: #121417 !important;
 }
 
-/* Hero Section */
+/* Soothing Ambient Hero Section */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -186,7 +187,10 @@ h1, h2, h3, h4 {
   justify-content: center;
   text-align: center;
   padding: 120px 20px 80px;
-  background: radial-gradient(circle at center, #272d38 0%, #121417 100%);
+  /* Ambient glow: soft warm candlelight fading into warm charcoal */
+  background: 
+    radial-gradient(ellipse at 50% 30%, rgba(216, 184, 116, 0.12) 0%, transparent 60%),
+    radial-gradient(circle at 50% 50%, #221f1c 0%, #151413 100%);
 }
 
 .hero-crest {
