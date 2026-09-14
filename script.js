@@ -3,20 +3,42 @@ document.addEventListener('DOMContentLoaded', () => {
   const formStatus = document.getElementById('formStatus');
 
   if (bookingForm) {
-    bookingForm.addEventListener('submit', (e) => {
+    bookingForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Collect field data
-      const name = document.getElementById('fullName').value;
-      const email = document.getElementById('email').value;
-      const date = document.getElementById('eventDate').value;
-      const eventType = document.getElementById('eventType').value;
+      const submitBtn = bookingForm.querySelector('.submit-btn');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
 
-      // Status confirmation display (can be hooked up to EmailJS or Formspree)
-      formStatus.style.color = '#d4af37';
-      formStatus.textContent = `Thank you, ${name}! Your inquiry for ${date} has been sent. Chef Sherry will reach out shortly.`;
+      const formData = new FormData(bookingForm);
 
-      bookingForm.reset();
+      try {
+        const response = await fetch(bookingForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          const name = document.getElementById('fullName').value;
+          const date = document.getElementById('eventDate').value;
+
+          formStatus.style.color = '#d8b874';
+          formStatus.textContent = `Thank you, ${name}! Your inquiry for ${date} has been sent. Chef Sherry will reach out shortly.`;
+          bookingForm.reset();
+        } else {
+          formStatus.style.color = '#e57373';
+          formStatus.textContent = 'Oops! There was a problem sending your inquiry. Please try again.';
+        }
+      } catch (error) {
+        formStatus.style.color = '#e57373';
+        formStatus.textContent = 'Network error. Please try again or reach out directly.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Inquiry';
+      }
     });
   }
 
